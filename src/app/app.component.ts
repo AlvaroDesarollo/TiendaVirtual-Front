@@ -15,4 +15,10 @@ export class AppComponent {
   ];
   public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
   constructor() {}
+
+  theme(ev: any){
+    
+    document.body.classList.toggle('dark', ev.detail.checked);
+    
+  }
 }

@@ -1,6 +1,13 @@
 <ion-app>
   <ion-split-pane contentId="main-content">
     <ion-menu contentId="main-content" type="overlay">
+    <ion-item lines="full">
+      <ion-icon slot="start" name="moon"></ion-icon>
+       <ion-label>
+          Toggle Dark Theme
+        </ion-label>
+        <ion-toggle (ionChange)="theme($event)"id="themeToggle" slot="end"></ion-toggle>
+      </ion-item>
       <ion-content>
         <ion-list id="inbox-list">
           <ion-list-header>Inbox</ion-list-header>
