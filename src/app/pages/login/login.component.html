@@ -1,0 +1,91 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title [innerHTML]="titulo"> </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<!-- Menu Login -->
+<ion-content *ngIf="!login && !register" class="auth-form">
+  <ion-card>
+    <img
+      alt="login"
+      src="https://www.adslzone.net/app/uploads-adslzone.net/2019/04/borrar-fondo-imagen-1200x675.jpg"
+    />
+    <ion-card-header>
+      <ion-button mode="ios" (click)="register = true; login = false"
+        ><ion-icon slot="start" name="download"></ion-icon> Registro</ion-button
+      >
+      <ion-button
+        mode="ios"
+        color="danger"
+        (click)="login = true; register = false"
+      >
+        <ion-icon slot="start" name="log-in"></ion-icon>
+        Login</ion-button
+      >
+    </ion-card-header>
+  </ion-card>
+</ion-content>
+
+<!-- Menu Login -->
+<ion-content *ngIf="login && !register" class="auth-form">
+  <ion-card>
+    <ion-card-header>
+      <ion-item>
+        <ion-input label="Usuario:" placeholder="usario"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input
+          label="Contraseña:"
+          type="password"
+          placeholder="contraseña"
+        ></ion-input>
+      </ion-item>
+      <ion-button
+        mode="ios"
+        color="danger"
+        (click)="login = false; register = false"
+      >
+        <ion-icon slot="start" name="log-in"></ion-icon>
+        Login</ion-button
+      >
+    </ion-card-header>
+  </ion-card>
+</ion-content>
+
+<!-- Menu Register -->
+
+<ion-content *ngIf="!login && register" class="auth-form">
+  <ion-card>
+    <ion-card-header [formGroup]="formulario">
+      <ion-item>
+        <ion-input
+          formControlName="nombre"
+          label="Nombre:"
+          placeholder="nombre completo"
+        ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input
+          formControlName="correo"
+          label="correo:"
+          placeholder="correo"
+        ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input
+          formControlName="contrasena"
+          label="Contraseña:"
+          type="password"
+          placeholder="contraseña"
+        ></ion-input>
+      </ion-item>
+      <ion-button
+        [disabled]="!formulario.valid"
+        mode="ios"
+        (click)="register = true; login = false"
+        ><ion-icon slot="start" name="download"></ion-icon> Registro</ion-button
+      >
+    </ion-card-header>
+  </ion-card>
+</ion-content>

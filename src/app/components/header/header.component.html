@@ -4,5 +4,12 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title [innerHTML]="titulo"></ion-title>
+
+    <ion-item (click)="clickCarrito()"*ngIf="enableCarrito" slot="end" style="justify-items: right !important">
+      <ion-icon name="cart"> </ion-icon>
+      <ion-badge color="danger" style="position: absolute; left: 15px; top: 3px"
+        >{{valorCarrito}}</ion-badge
+      >
+    </ion-item>
   </ion-toolbar>
 </ion-header>
