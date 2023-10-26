@@ -8,9 +8,11 @@ import { ComponentsModule } from '../components/components.module';
 import { ProductosComponent } from './productos/productos.component';
 import { ResumenCompraComponent } from './resumen-compra/resumen-compra.component';
 import { LoginComponent } from './login/login.component';
+import { ProveedoresComponent } from './proveedores/proveedores.component';
+import { AdminComponent } from './admin/admin.component';
 
 @NgModule({
-  declarations: [ProductosComponent, ResumenCompraComponent, LoginComponent],
+  declarations: [ProductosComponent, ResumenCompraComponent, LoginComponent, ProveedoresComponent, AdminComponent],
   imports: [
     CommonModule,
     PagesRoutingModule,

@@ -1,6 +1,6 @@
 <ion-app>
   <ion-split-pane contentId="main-content">
-    <ion-menu *ngIf ="showMenu" contentId="main-content" type="overlay">
+    <ion-menu *ngIf="showMenu" contentId="main-content" type="overlay">
       <ion-item lines="full">
         <ion-icon slot="start" name="moon"></ion-icon>
         <ion-label> Tema Oscuro </ion-label>
@@ -39,7 +39,7 @@
         </ion-list>
 
         <ion-list id="labels-list">
-          <ion-list-header>Labels</ion-list-header>
+          <ion-list-header>Realizado Por:</ion-list-header>
 
           <ion-item *ngFor="let label of labels" lines="none">
             <ion-icon

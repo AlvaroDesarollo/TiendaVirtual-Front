@@ -12,7 +12,7 @@ export interface IProducto {
   image: string;
   nombre: string;
   valor: number;
-  id: number;
+  id: number | string;
   cantidadVendida: number;
 }
 @Component({
@@ -37,6 +37,7 @@ export class ProductosComponent implements OnInit {
 
   ngOnInit() {
     console.log('Productos Page Tienda.......')
+    this.globalService.carritoCompras = [];
     this.traerProductos();
   }
 

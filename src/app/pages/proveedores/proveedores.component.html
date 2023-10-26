@@ -1,0 +1,119 @@
+<app-header
+  [titulo]="titulo"
+  [enableCarrito]="true"
+  [enableCarrito]="false"
+></app-header>
+
+<ion-content color="light" *ngIf="show" [fullscreen]="true">
+  <!-- <ion-card mode="ios">
+    <ion-card-header>
+      <ion-card-title>Crear Producto:</ion-card-title>
+    </ion-card-header>
+    <ion-card-content> -->
+  <ion-list [inset]="true" [formGroup]="formulario">
+    <ion-list-header>
+      <ion-label>Crear Producto:</ion-label>
+    </ion-list-header>
+    <ion-item>
+      <ion-input
+        formControlName="nombre"
+        label="Nombre del producto:"
+        labelPlacement="floating"
+        placeholder="Nombre"
+        type="text"
+      ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input
+        formControlName="cantidad"
+        label="Cantidad a crear:"
+        labelPlacement="floating"
+        placeholder="Cantidad"
+        type="number"
+      ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input
+        formControlName="precio"
+        label="Valor unitario:"
+        labelPlacement="floating"
+        placeholder="Precio"
+        type="number"
+      ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-select
+        formControlName="categoria"
+        label="Categoría"
+        [interfaceOptions]="customPopoverOptions"
+        interface="action-sheet"
+        placeholder="Selecione"
+        label-placement="floating"
+      >
+        <ion-select-option
+          *ngFor="let categoria of categorias"
+          [value]="categoria.id"
+          >{{ categoria.nombreCategoria }}</ion-select-option
+        >
+      </ion-select>
+    </ion-item>
+    <ion-chip (click)="openModal()" id="open-modall" slot="end">
+      <ion-icon name="pricetag" color="primary"></ion-icon>
+      <ion-label>Crear categoría</ion-label>
+      <ion-icon name="add"></ion-icon>
+    </ion-chip>
+    <ion-item>
+      <ion-input
+        formControlName="url"
+        label="Url de Imagen:"
+        labelPlacement="floating"
+        placeholder="Url"
+        type="url"
+      ></ion-input>
+    </ion-item>
+  </ion-list>
+  <!-- </ion-card-content> -->
+  <ion-button
+    [disabled]="formulario.invalid"
+    shape="round"
+    color="danger"
+    expand="block"
+    (click)="crearProducto()"
+  >
+    <ion-icon name="pricetag-outline"></ion-icon> Crear Producto
+  </ion-button>
+  <!-- </ion-card> -->
+</ion-content>
+
+<!-- Modal Categorias -->
+
+<ion-modal
+  [isOpen]="isModalOpen"
+  trigger="open-modall"
+  (willDismiss)="onWillDismiss($event)"
+>
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="end">
+          <ion-button
+            [disabled]="formularioCategoria.invalid"
+            (click)="cerrar()"
+            >Crear</ion-button
+          >
+        </ion-buttons>
+        <ion-title>Crear categoría</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content [formGroup]="formularioCategoria" class="ion-padding">
+      <ion-item>
+        <ion-label position="stacked">Nombre de la Categoría</ion-label>
+        <ion-input
+          type="text"
+          placeholder="categoría"
+          formControlName="nombreCategoria"
+        ></ion-input>
+      </ion-item>
+    </ion-content>
+  </ng-template>
+</ion-modal>

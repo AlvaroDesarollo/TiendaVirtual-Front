@@ -17,7 +17,7 @@ export class PeticionesService {
           result.push({
             stock: producto.cantidad_stock,
             flagStock: producto.cantidad_stock < 4,
-            categoria: producto.categoria,
+            categoria: producto.idCategoria,
             image: producto.imagen,
             nombre: producto.nombre_producto,
             valor: producto.valor_pesos_colombianos,
@@ -28,7 +28,20 @@ export class PeticionesService {
       })
     );
   }
+  getCategorias(): Observable<any> {
+    return this.http.get(`${this.urlBase}/categoria`);
+  }
 
+  comprobarUser(type: 'proveedor' | 'admin', doc: string): Observable<any> {
+    return this.http.get(`${this.urlBase}/${type}/${doc}`);
+  }
+
+  crearProducto(payload: any): Observable<any> {
+    return this.http.post(`${this.urlBase}/products/crearProducto`, payload);
+  }
+  crearCategoria(payload: any): Observable<any> {
+    return this.http.post(`${this.urlBase}/categoria/crearCategoria`, payload);
+  }
   createVenta(payload: any): Observable<any> {
     return this.http.post(`${this.urlBase}/ventas/crearVenta`, payload);
   }
@@ -38,5 +51,13 @@ export class PeticionesService {
   }
   crearCliente(cliente: object): Observable<any> {
     return this.http.post(`${this.urlBase}/cliente/crearCliente`, cliente);
+  }
+
+  crearProveedor(proveedor: object): Observable<any> {
+    return this.http.post(`${this.urlBase}/proveedor/crearProveedor`, proveedor);
+  }
+
+  traerVenta(venta: object): Observable<any> {
+    return this.http.post(`${this.urlBase}/ventas/reporte`, venta);
   }
 }

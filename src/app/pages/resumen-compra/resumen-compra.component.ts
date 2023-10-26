@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 export class ResumenCompraComponent implements OnInit {
   public titulo: string = '';
   public carrito: IProducto[] = [];
-  public totalProductos: number = 2;
+  public totalProductos: number = 0;
   public cantidadProductosComprados: number = 0;
 
   constructor(
@@ -26,6 +26,7 @@ export class ResumenCompraComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    console.log('resumen page')
     this.titulo = 'Resumen de Compra';
     this.carrito = this.globalService.carritoCompras;
     this.setVariables();
@@ -195,17 +196,18 @@ export class ResumenCompraComponent implements OnInit {
 
   async finalizarCompra() {
     this.globalService.carritoCompras = [];
+    this.carrito = [];
     const loading = await this.alertService.loadingSimple({
       msg: 'Compra Exitosa...',
       duration: 1000,
     });
-    this.router.navigateByUrl('pages/productos', { skipLocationChange: true });
+    this.router.navigateByUrl('pages/productos', { skipLocationChange: true, replaceUrl: true });
   }
 
   async verFactura(factura: string) {
     const modal = await this.modalService.createModalSimple({
       show: true,
-      title: 'Ejemplo',
+      title: 'Factura de Venta',
       content: factura,
     });
     return;

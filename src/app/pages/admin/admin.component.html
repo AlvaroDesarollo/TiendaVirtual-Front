@@ -1,0 +1,134 @@
+<app-header
+  [titulo]="titulo"
+  [enableCarrito]="true"
+  [enableCarrito]="false"
+></app-header>
+<ion-content [fullscreen]="true">
+  <ion-chip
+    (click)="setVariable('proveedor')"
+    [color]="proveedor ? 'light' : 'primary'"
+  >
+    <ion-avatar>
+      <img
+        alt="Proveedor"
+        src="https://ionicframework.com/docs/img/demos/avatar.svg"
+      />
+    </ion-avatar>
+    <ion-label>Crear Proveedor</ion-label>
+    <ion-icon name="close-circle"></ion-icon>
+  </ion-chip>
+
+  <ion-chip
+    (click)="setVariable('ventas')"
+    [color]="ventas ? 'light' : 'primary'"
+  >
+    <ion-icon name="pin" color="primary"></ion-icon>
+    <ion-label>Trear Ventas</ion-label>
+    <ion-icon name="close"></ion-icon>
+  </ion-chip>
+
+  <!-- Tarejta de Proveedores -->
+  <ion-content *ngIf="proveedor && !ventas" color="light">
+    <ion-list [formGroup]="formulario" [inset]="true">
+      <ion-list-header>
+        <ion-label>Crear Proveedor:</ion-label>
+      </ion-list-header>
+      <ion-item>
+        <ion-input
+          formControlName="nombre"
+          label="Nombre:"
+          labelPlacement="floating"
+          placeholder="Nombre"
+          type="text"
+        ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input
+          formControlName="correo"
+          label="Correo:"
+          labelPlacement="floating"
+          placeholder="email@email.com"
+          type="email"
+        ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input
+          formControlName="id"
+          label="Num Documento:"
+          labelPlacement="floating"
+          placeholder="num documento"
+          type="number"
+        ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input
+          formControlName="telefono"
+          label="Num teléfono:"
+          labelPlacement="floating"
+          placeholder="num de telefono"
+          type="number"
+        ></ion-input>
+      </ion-item>
+    </ion-list>
+    <ion-button
+      [disabled]="formulario.invalid"
+      (click)="crearProveedor()"
+      shape="round"
+      expand="block"
+      fill="outline"
+    >
+      <ion-icon slot="start" name="cart"></ion-icon>
+      Crear Proveedor</ion-button
+    >
+  </ion-content>
+
+  <!-- Tarejta Tarer Ventas -->
+  <ion-content *ngIf="!proveedor && ventas" color="light">
+    <ion-list [inset]="true">
+      <ion-radio-group [(ngModel)]="tipoDeVenta">
+        <ion-item>
+          <ion-label>Ventas totales</ion-label>
+          <ion-radio mode="md" value="total"></ion-radio>
+        </ion-item>
+
+        <!-- <ion-item>
+          <ion-label>Ventas totales por producto</ion-label>
+          <ion-radio mode="md" value="totalProducto"></ion-radio>
+        </ion-item> -->
+
+        <ion-item>
+          <ion-label>Ventas por producto</ion-label>
+          <ion-radio mode="md" value="producto"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+      <ion-item *ngIf="tipoDeVenta === 'producto'">
+        <ion-select
+          [(ngModel)]="prodcutoSelect"
+          label="Categoría"
+          [interfaceOptions]="customPopoverOptions"
+          interface="action-sheet"
+          placeholder="Selecione"
+          label-placement="floating"
+        >
+          <ion-select-option
+            *ngFor="let producto of productos"
+            [value]="producto.id"
+            >{{ producto.nombre }}</ion-select-option
+          >
+        </ion-select>
+      </ion-item>
+    </ion-list>
+    <ion-button
+      (click)="trearVentas()"
+      shape="round"
+      expand="block"
+      fill="outline"
+      [disabled]="
+        !tipoDeVenta || (tipoDeVenta === 'producto' && prodcutoSelect === '')
+      "
+    >
+      <ion-icon slot="start" name="cart"></ion-icon>
+      Traer Ventas</ion-button
+    >
+  </ion-content>
+</ion-content>
